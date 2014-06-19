@@ -1,0 +1,19 @@
+<ul class="navigation_tabs">
+    <li class="menu1<?php echo(($this->routeNames('controller') == 'index') ? ' active' : ''); ?>">
+        <a href="<?php echo($this->easyUrl(array('controller' => 'index'))); ?>">
+            управление объявлениями
+        </a>
+    </li><li class="menu2<?php echo(($this->routeNames('controller') == 'settings') ? ' active' : ''); ?>">
+        <a href="<?php echo($this->easyUrl(array('controller' => 'settings'))); ?>">
+            профиль
+        </a>
+    </li><li class="menu3<?php echo(($this->routeNames('controller') == 'wallet') ? ' active' : ''); ?>">
+        <a href="<?php echo($this->easyUrl(array('controller' => 'wallet'))); ?>">
+            кошелек
+        </a>
+    </li><li class="menu4<?php echo(($this->routeNames('controller') == 'favorites') ? ' active' : ''); ?>">
+        <a href="<?php echo($this->easyUrl(array('controller' => 'favorites'))); ?>">
+            избранное
+        </a>
+    </li>
+</ul>

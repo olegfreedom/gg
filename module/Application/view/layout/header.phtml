@@ -1,0 +1,22 @@
+<header id="header">
+    <div class="container group">
+        <nav id="nav">
+            <ul>
+                <li<?php echo(($this->routeNames('module') == 'application' && $this->routeNames('controller') == 'about-us') ? ' class="active"' : ''); ?>>
+                    <a href="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'about-us'))); ?>">O нас</a>
+                </li>
+                <li<?php echo(($this->routeNames('module') == 'application' && $this->routeNames('controller') == 'contact-us') ? ' class="active"' : ''); ?>>
+                    <a href="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'contact-us'))); ?>">Обратная связь</a>
+                </li>
+
+                <li<?php echo(($this->routeNames('module') == 'application' && $this->routeNames('controller') == 'faq') ? ' class="active"' : ''); ?>>
+                    <a href="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'faq'))); ?>">FAQ</a>
+                </li>
+            </ul>
+        </nav>
+        <h1 class="logo">
+            <a href="<?php echo($this->basePath('/')); ?>"><?php echo($this->siteName()); ?>">Uslugi.kz</a>
+        </h1>
+        <?php echo($this->partial('profile-partials/login-holder.phtml')); ?>
+    </div>
+</header>

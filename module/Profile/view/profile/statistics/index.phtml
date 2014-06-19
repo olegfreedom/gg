@@ -1,0 +1,56 @@
+<div class="wrapper sms-page">
+    <div class="wrapper-center">
+        <div class="subnav">
+            <div class="holders group">
+            </div>
+        </div>
+        <?php if ($inboxList) { ?>
+            <?php foreach ($inboxList as $item) { ?>
+                <?php  ?>
+                <div class="toggle-block2 slide">
+                    <div class="holders">
+                        <div class="sms-post">
+                            <input type="hidden" name="advert_id" value="<?php echo $item['id']; ?>">
+                            <span class="envelope"></span>
+
+                            <div class="col">
+                                <a class="opener amount-sms" href="#">
+                                    <em></em>
+                                    <span></span>
+                                </a>
+                            </div>
+                            <div class="col text-col">
+                                <div class="post-text-holder">
+                                    <?php if (!empty($item['img_id'])) { ?>
+                                        <img src="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'image', 'action' => 'adverts-gallery', 'id' => $item['img_id'], 'w' => 100, 'h' => 100, 'crop' => 'y'))) ?>" alt=""/>
+                                    <?php } else { ?>
+                                        <img src="/images/tmp/postimg10.jpg" alt=""/>
+                                    <?php } ?>
+
+                                    <h2><?php echo ($item['name']); ?></h2>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <?php if ($item['price'] > 0) { ?>
+                                    <div class="post-text-holder group">
+                                <span class="pricing">
+                                    <span class="symb"></span>
+                                    <?php echo $item['price']; ?>
+                                </span>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="statistic" ></div>
+                        </div>
+                    </div>
+
+                </div>
+            <?php } ?>
+        <?php } ?>
+        <input type="hidden" name="statistic_url" value="<?php echo $this->easyUrl(array('action' => 'get-statistic')); ?>">
+    </div>
+</div>
+
+
+
+

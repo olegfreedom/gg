@@ -1,0 +1,10 @@
+/**
+ * Use to URL:
+ *  /adverts
+ *  /adverts/*
+ */
+
+.displayNone {
+    display: none;
+}
+

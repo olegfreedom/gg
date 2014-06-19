@@ -1,0 +1,311 @@
+<pre>
+<?php // print_r($randomTopAdverts); ?>
+</pre>
+<div id="main">
+    <div class="container group">
+        <?php echo($this->partial('/partials/main-holder.phtml')); ?>
+        <div class="left">
+            <form class="srch" action="<?php echo($this->easyUrl(array('action' => 'search', 'category' => ($currentCategory > 0 ? $currentCategory : null)))); ?>" method="post">
+             <section class="filter nice-border">
+                <div class="holder">
+                    <h2>Фильтр поиска</h2>
+                    <div class="toggle-block slide group">
+                        <div class="col">
+                            <label for="reg">Регион</label>
+                             <select id="reg" name="region">
+                                 <option value="0">Все регионы</option>
+                                <?php if ($locationList) { ?>
+                                    <?php foreach ($locationList as $item) { ?>
+                                        <option <?php echo($params['region'] == $item['id'] ? 'selected' : ''); ?> value="<?php echo $item['id']; ?>">
+                                            <?php echo $item['name']; ?>
+                                        </option>
+                                    <?php } ?>
+                                <?php } ?>
+                             </select>
+                        </div>
+                        <div class="col indent">
+                            <label for="twn">Город</label>
+                            <select id="twn" name="town">
+                                <option value='0'>Выберите регион</option>
+                            </select> 
+                        </div>
+                        <div class="group">                                        
+                            <div class="slide">
+                                <div class="col">
+                                    <h3>Цена</h3>
+                                    <table class="slider-holder">                                                   
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="sample-rate"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>   
+                                            <td>
+                                                <label for="from" class="options">От</label>
+                                                <input type="text" name="price_min" id="from" value="<?php echo($params['price_min']); ?>"/>
+                                                <label for="to" class="options">До</label>
+                                                <input type="text" name="price_max" id="to" value="<?php echo($params['price_max']); ?>"/>
+                                                <select name="currency" class="currency">
+                                                    <option value="1">тг</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="group">
+                                                <label for="rent">Тип</label>
+                                                <select name="type" id="rent">
+                                                    <?php if ($typeList) { ?>
+                                                        <?php foreach ($typeList as $item) { ?>
+                                                            <option <?php echo($params['type'] == $item['id'] ? 'selected' : ''); ?> value="<?php echo $item['id']; ?>">
+                                                                <?php echo $item['name']; ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td class="group">
+                                                <label for="build">Строение</label>
+                                                <select name="build" id="build">
+                                                    <option value="Строение">Строение</option>
+                                                </select>
+                                            </td>                                                           
+                                        </tr>
+                                         <tr>
+                                            <td class="group">
+                                                <label for="ter1">Пр. терит.</label>
+                                                <input type="text" name="ter_min" id="ter1" placeholder="от"/>
+                                                <input type="text" name="ter_min" id="ter2" placeholder="до"/>
+                                            </td>                                                                                                                      
+                                        </tr>
+                                         <tr>
+                                            <td class="group">
+                                                <label for="state">Состояние</label>
+                                                <select id="state" name="state">
+                                                    <option value="Состояние">Состояние</option>
+                                                </select>
+                                            </td>                                                           
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col indent">
+                                    <h3 class="param">Параметры</h3>
+                                    <table class="right_block">                                                    
+                                        <tr class="group">
+                                            <td class="group">
+                                                <input type="checkbox" <?php echo($params['image'] == 'y' ? ' checked="checked"' : ''); ?> value="y" id="view" name="image">
+                                                <label for="view">с фото</label>
+                                            </td>
+                                        </tr>
+                                        <tr class="group">
+                                            <td class="group">
+                                                <input type="checkbox" <?php echo($params['top'] == 'y' ? ' checked="checked"' : ''); ?> name="top" value="y" id="view3">
+                                                <label for="view3">только ТОП</label>
+                                            </td>
+                                        </tr>
+                                        <tr class="group">
+                                            <td class="group">
+                                                <input type="checkbox" <?php echo($params['map'] == 'y' ? ' checked="checked"' : ''); ?> name="map" value="y" id="view2">
+                                                <label for="view2">с картой</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="group">
+                                                <label for="area1">Площадь</label>
+                                            </td>
+                                             <td>
+                                                <input type="text" name="area_min" id="area1" placeholder="от"/>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="area_min" id="area2" placeholder="до"/>
+                                            </td>                                                                                                                      
+                                        </tr>
+                                        <tr>
+                                            <td class="group">
+                                                <label for="room1">Комнат</label>
+                                            </td>
+                                             <td>
+                                                <input type="text" name="room_min" id="room1" placeholder="от"/>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="room_min" id="room2" placeholder="до"/>
+                                            </td>                                                                                                                      
+                                        </tr>
+                                        <tr>
+                                            <td class="group">
+                                                <label for="total1">Общая</label>
+                                            </td>
+                                             <td>
+                                                <input type="text" name="total_min" id="total1" placeholder="от"/>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="total_min" id="total2" placeholder="до"/>
+                                            </td>                                                                                                                      
+                                        </tr>
+                                        <tr>
+                                            <td class="group">
+                                                <label for="floor1">Жилая</label>
+                                            </td>
+                                             <td>
+                                                <input type="text" name="floor_min" id="floor1" placeholder="от"/>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="floor_min" id="floor2" placeholder="до"/>
+                                            </td>                                                                                                                      
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>                                       
+                        </div>
+                        <div class="slider_bottom group">
+                            <a class="links opener" href="#">расширенный поиск</a>
+                            <a class="btn_search">Подобрать</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <input type="submit" style="display: none;">
+            <!--<input type="hidden" name="type" value="<?php echo($advertsType); ?>"/>-->
+            <input type="hidden" name="category" value="<?php echo($currentCategory); ?>"/>
+            <input type="hidden" name="location_url" value="<?php echo($this->easyUrl(array('action' => 'get-city'))); ?>">
+            <input type="hidden" name="location_city" value="<?php echo($params['town']); ?>">
+            <input type="hidden" class="maxPrice" name="maxPrice" value="<?php echo($maxPrice); ?>"/>
+            <input type="hidden" id="input-number1" value="<?php echo($params['price_min']); ?>"/>
+            <input type="hidden" id="input-number2" value="<?php echo($params['price_max']); ?>"/>
+            <input type="hidden" name="search-form" value="0">
+            <input type="hidden" name="validator" value="<?php echo ($this->easyUrl(array('action' => 'validator')));?>">
+            </form>
+            <section class="block_top">
+                <div class="section_title group">
+                    <h2>Топ объявления</h2>
+                    <span class="top"><a href="<?php echo ($this->easyUrl(array('controller'=> 'faq')));?>?howto">Как попасть в топ?</a></span>
+                </div>
+                <?php if ($randomTopAdverts) { ?>
+                    <?php foreach ($randomTopAdverts as $item) { ?>
+                        <article class="post group">
+                            <div class="image_holder">
+                                <?php if (!empty($item['img_url'])) { ?>
+                                    <img src="<?php echo($this->imageUrl($item['img_url'], 200, 200, true)) ?>" alt="my_img"/>
+                                <?php } else { ?>
+                                    <img src="/images/no_photo.png" alt="img">
+                                <?php } ?>
+                            </div>
+                            <div class="text_info urgent">
+                                <div class="article_title group">
+                                    <span class="price">Цена:</span>
+                                    <span class="sum">
+                                        <?php echo (($item['price'] > 0) ? $item['price'] : 'цена не указана'); ?>
+                                    </span>
+                                    <?php if ($item['mark'] == 'y') { ?>
+                                        <span class="urgently">срочно</span>
+                                    <?php } ?>
+                                    <span class="rent">долгосрочная аренда</span>
+                                </div>
+                                <address>
+                                    <?php echo ((isset($item['location'])) ? $item['location'] : 'адрес не указан'); ?>
+                                </address>
+                                <div class="text_holder group">
+                                    <div class="col">
+                                        <p>Тип строения: <span class="description">кирпичь</span></p>
+                                        <p>Общая площадь: <span class="description">116 кв/м</span></p>
+                                        <p>Прил.Территория: <span class="description">400 кв/м</span></p>
+                                    </div>
+                                    <div class="col">
+                                        <p>Год: <span class="description year">1992</span><span class="motion">Этажи:</span> <span class="description">2</span></p>
+                                        <p>Состояние: <span class="description">хорошее</span></p>
+                                    </div>
+                                </div>
+                                <div class="article_bottom group">
+                                    <a class="links" href="<?php echo($this->easyUrl(array('action' => 'phone', 'id' => $item['id']))); ?>">Связаться с арендодателем</a>
+                                    <div class="tel">
+                                        <div class="phones"></div>
+                                    </div>
+                                    <a class="more" href="<?php echo($this->easyUrl(array('controller' => 'adverts', 'action' => 'view', 'type' => $item['type_id'], 'id' => $item['id']))); ?>">Подробнее</a> 
+                                </div>
+                            </div>
+                        </article>
+                    <?php } ?>
+                <?php } ?>
+            </section>
+            <section class="block">
+                <div class="section_title group">
+                    <h2>Обычные объявления</h2>
+                    <?php if ($advertsCount > 0) { ?>
+                        <span class="top"><a href="#">Найдено объявлений: <?php echo ($advertsCount); ?></a></span>
+                    <?php } else { ?>
+                        <span class="top"><a href="#">По запросу ничего не найдено</a></span>
+                    <?php } ?>
+                </div>
+                <?php if ($advertList) { ?>
+                    <?php foreach ($advertList as $item) { ?>
+                        <article class="post group">
+                            <div class="image_holder">
+                                <?php if (!empty($item['img_url'])) { ?>
+                                    <img src="<?php echo($this->imageUrl($item['img_url'], 200, 200, true)); ?>" alt=""/>
+                                <?php } else { ?>
+                                    <img src="/images/no_photo.png" alt="img">
+                                <?php } ?>
+                            </div>
+                            <div class="text_info urgent">
+                                <div class="article_title group">
+                                    <span class="price">Цена:</span>
+                                    <span class="sum">
+                                        <?php echo (($item['price'] > 0) ? $item['price'] : 'цена не указана'); ?>
+                                    </span>
+                                    <?php if ($item['mark'] == 'y') { ?>
+                                        <span class="urgently">срочно</span>
+                                    <?php } ?>
+                                    <span class="rent">долгосрочная аренда</span>
+                                </div>
+                                <address>
+                                    <?php echo ((isset($item['location'])) ? $item['location'] : 'адрес не указан'); ?>
+                                </address>
+                                <div class="text_holder group">
+                                    <div class="col">
+                                        <p>Тип строения: <span class="description">кирпичь</span></p>
+                                        <p>Общая площадь: <span class="description">116 кв/м</span></p>
+                                        <p>Прил.Территория: <span class="description">400 кв/м</span></p>
+                                    </div>
+                                    <div class="col">
+                                        <p>Год: <span class="description year">1992</span><span class="motion">Этажи:</span> <span class="description">2</span></p>
+                                        <p>Состояние: <span class="description">хорошее</span></p>
+                                    </div>
+                                </div>
+                                <div class="article_bottom group">
+                                    <a class="links" href="<?php echo($this->easyUrl(array('action' => 'phone', 'id' => $item['id']))); ?>">Связаться с арендодателем</a>
+                                    <div class="tel">
+                                        <div class="phones"></div>
+                                    </div>
+                                    <a class="more" href="<?php echo($this->easyUrl(array('controller' => 'adverts', 'action' => 'view', 'type' => $item['type_id'], 'id' => $item['id']))); ?>">Подробнее</a> 
+                                </div>
+                            </div>
+                        </article>
+                    <?php } ?>
+                <?php } ?>
+            </section>
+            <div class="page_holder">
+                <div class="pagination_wrapper">
+                    <?php echo($this->partial('partials/paginator.phtml', array('paginator' => $paginator, 'setAction' => 'search'))); ?>
+                </div> 
+            </div>
+        </div>
+        <aside id="aside">
+            <div class="nice-border">
+                <div class="holder">                               
+                <h2> Разделы</h2>
+                    <ul>
+                        <?php echo($this->partial('application/catalog/category/list-items.phtml', array('categoryList' => $categoryList, 'currentCategory' => $currentCategory, 'menuLevel' => 1))); ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="banners nice-border">
+                <div class="holder">                               
+                    <ul>
+                        <?php echo($this->partial('application/catalog/category/banners.phtml', array('bannersList' => $bannersList))); ?>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>

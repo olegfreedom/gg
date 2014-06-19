@@ -1,0 +1,116 @@
+<div class="wrapper sms-page">
+    <div class="wrapper-center">
+        <div class="subnav">
+            <div class="holders group">
+                <a class="sbmt-gr active" href="#">Сообщения</a>
+                <a class="sbmt-gr" href="#">Архив</a>
+                <form id="filtr-form" action="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'messages', 'action' => 'sort')));?>" method="post">
+                    <select class="select-filtr" id="filtr" name='filtr'>
+                        <option disabled selected >Сортировка</option>
+                        <option value='date-desc' <?php echo(($select == 'date-desc') ? " selected=''" : ''); ?>>по дате, сначала новые</option>
+                        <option value='date-asc' <?php echo(($select == 'date-asc') ? " selected=''" : ''); ?>>по дате, сначала старые</option>
+                        <option value='count-asc' <?php echo(($select == 'count-asc') ? " selected=''" : ''); ?>>по уменьшению кол-ва сообщений</option>
+                        <option value='count-desc' <?php echo(($select == 'count-desc') ? " selected=''" : ''); ?>>по увеличения кол-ва сообщений</option>
+                        <option value='' <?php echo(($select == '') ? " selected=''" : ''); ?>>по количеству новых</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <?php if ($inboxList) { ?>
+            <?php foreach ($inboxList as $item) { ?>
+                <?php  ?>
+                <div class="toggle-block2 slide">
+                    <div class="holders">
+                        <div class="sms-post <?php echo (($item['dialog_was_read']) ? '' : 'not-read');?>">
+                            <span class="envelope"></span>
+
+                            <div class="col">
+                                <a class="opener amount-sms <?php echo (($item['id'] == $opendialog) ? ' open-dialog-on-load' : ''); ?>" href="#">
+                                    <em><?php echo $item['count']; ?></em>
+                                    <span>новых</span>
+                                </a>
+                            </div>
+                            <div class="col text-col">
+                                <div class="post-text-holder">
+                                    <?php if ($item['image']) { ?>
+                                        <img src="<?php echo $item['image']; ?>" alt="#"/>
+                                    <?php } else { ?>
+                                        <img src="/images/tmp/postimg10.jpg" alt="#"/>
+                                    <?php } ?>
+
+                                        <h2><a href="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'adverts', 'action' => 'view', 'id' => $item['id']))) ?>"><?php echo ($item['name']); ?></a></h2>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <?php if ($item['price'] > 0) { ?>
+                                <div class="post-text-holder group">
+                                <span class="pricing">
+                                    <span class="symb"></span>
+                                    <?php echo $item['price']; ?>
+                                </span>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php if (isset($item['messages'])) { ?>
+                        <?php foreach ($item['messages'] as $mess) { ?>
+
+                            <div class="slide">
+                                <div class="toggle-block3 slide message-detail">
+                                    <div class="slide3 controll-panel">
+                                        <div class="holders">
+                                            <div class="controlls-wrapper group">
+                                                <a class="deleteIt" href="#">Удалить</a>
+                                                <a class="archiveIt" href="#">Отправить в архив</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="holders <?php echo ($mess['was_read'] == 'n') ? ' not-read' : ''; ?>">
+                                        <div class="col column1">
+                                            <a class="opener3 the-opener" href="#">
+                                                <input type="checkbox" name="type" value="#">
+                                            </a>
+                                        </div>
+                                        <div class="col clickable unread" data-href="<?php echo $this->easyUrl(array('action' => 'talk','user' => $mess['f_user_id'], 'advert' => $item['id']))?>">
+                                        <?php if ($mess['was_read'] == 'n' && $mess['unread_count'] > 0) {
+                                            echo ($mess['unread_count']);
+                                        } ?>
+                                        </div>
+                                        <div class="col clickable column2" data-href="<?php echo $this->easyUrl(array('action' => 'talk','user' => $mess['f_user_id'], 'advert' => $item['id']))?>">
+                                            <!--                                <img class="ava" src="/images/tmp/avka1.png" alt="#"/>-->
+                                        </div>
+                                        <div class="col clickable column3" data-href="<?php echo $this->easyUrl(array('action' => 'talk','user' => $mess['f_user_id'], 'advert' => $item['id']))?>" title="<?php echo $mess['username']?>">
+                                            <span class="med pers-name"><?php echo $mess['username']; ?></span>
+                                        </div>
+                                        <div class="col clickable text" data-href="<?php echo $this->easyUrl(array('action' => 'talk','user' => $mess['f_user_id'], 'advert' => $item['id']))?>">
+                                            <span class="med">сообщение</span> <span
+                                                class="reg-gr">- <?php echo substr($mess['text'], 0, 80); ?>&#8230;</span>
+                                        </div>
+                                        <!--                            <div class="col clickable">-->
+                                        <!--                                <div class="y-file">-->
+                                        <!--                                    <span>Прикрепленный файл</span>-->
+                                        <!--                                </div>-->
+                                        <!--                            </div>-->
+                                        <div class="col-right clickable date" data-href="<?php echo $this->easyUrl(array('action' => 'talk','user' => $mess['f_user_id'], 'advert' => $item['id']))?>">
+                                            <span class="sms-timing"><?php echo $mess['timestamp']; ?></span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        <?php } ?>
+
+
+    </div>
+</div>
+
+
+
+

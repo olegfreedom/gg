@@ -1,0 +1,156 @@
+<div id="main">
+<div class="container group">
+<?php echo($this->partial('/partials/main-holder.phtml')); ?>
+<?php if ($advert) { ?>
+<div class="left">
+    <?php echo($this->partial('partials/star-favourite.phtml')); ?>
+    <?php echo($this->partial('partials/slides-gallery-list.phtml')); ?>
+    <div class="text_slide">
+        <span>Описание:</span>
+        <p><?php echo($advert['description']); ?></p>
+        <div class="col_holder group">
+            <?php echo($this->partial('partials/advert-options.phtml')); ?>
+        </div>
+    </div>
+    <section class="block_top">
+        <div class="section_title group">
+            <h2>Отзывы</h2><span class="quantity">&nbsp;(<?php echo($advert['testimonial_count']); ?>)</span>
+            <a href="addOpinion" class="add goTo">добавить отзыв</a>
+        </div>
+        <?php foreach($advertComments as $item) {?>
+        <div class="reviews" id="testimonial-<?php echo($item['id']); ?>">
+            <div class="title_rewiew group">
+                <span class="info"><?php echo($item['name']); ?></span>
+                <ul class="star star-rating">
+                    <li class="one-star <?php echo ($item['rating'] == 1 ? 'setted' : ''); ?>"><a href="#"></a></li>
+                    <li class="two-stars <?php echo ($item['rating'] == 2 ? 'setted' : ''); ?>"><a href="#"></a></li>
+                    <li class="three-stars <?php echo ($item['rating'] == 3 ? 'setted' : ''); ?>"><a href="#"></a></li>
+                    <li class="four-stars <?php echo ($item['rating'] == 4 ? 'setted' : ''); ?>"><a href="#"></a></li>
+                    <li class="five-stars <?php echo ($item['rating'] == 5 ? 'setted' : ''); ?>"><a href="#"></a></li>
+                </ul>
+                <span class="rating">оценка:</span>
+            </div>
+            <div class="data_rewiew"><?php echo($item['date']);?></div>
+            <p><?php echo($item['message']); ?></p>
+        </div>
+        <?php } ?>
+        <?php if ($advert['user_id'] != $userId) { ?>
+        <form action="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'testimonials', 'action' => 'add'))); ?>" method="post" class="form_rewiew add-testimonial-comment">
+            <h2 id="addOpinion">Оставить отзыв</h2>
+            <fieldset>
+                <div class="wrapper_row group">
+                    <div class="row_form">
+                        <label for="name">Ваше имя</label><input type="text" name="name" id="name" value="<?php echo ($currentUser['name']); ?>" placeholder="Введите ваше имя">
+                    </div>
+                    <div class="row_form last">
+                        <label for="email">Эл. почта</label><input type="text" name="email" value="<?php echo ($currentUser['username']); ?>" id="email" placeholder="Введите адрес электронной почты">
+                    </div>
+                </div>
+                <div class="rating_holder group">
+                    <span class="rating">Ваша оценка:</span>
+                    <ul class="star star-rating">
+                        <li class="one-star"><a href="#"></a></li>
+                        <li class="two-stars"><a href="#"></a></li>
+                        <li class="three-stars"><a href="#"></a></li>
+                        <li class="four-stars"><a href="#"></a></li>
+                        <li class="five-stars"><a href="#"></a></li>
+                    </ul>
+                </div>
+                <div class="row_form last">
+                    <label for="text">Отзыв</label><textarea name="message" id="text"> Введите ваш комментарий</textarea>
+                </div>
+                <input type="hidden" value="<?php echo($this->easyUrl(array('controller' => 'testimonials','action' => 'validator'))); ?>" name="validator">
+                <input type="hidden" value="<?php echo($advert['id']); ?>" name="advert_id">
+                <input type="submit" class="btn_search" value="Отправить">
+            </fieldset>
+        </form>
+        <?php } ?>
+    </section>
+</div>
+<aside id="aside">
+    <div class="nice-border">
+        <div class="holder group">
+            <span class="date_publication">дата публикации :<?php echo($advert['created']); ?></span>
+            <div class="header_holder group">
+                <?php if ($advert['price'] > 0) {?>
+                <h2>Цена:<wbr><span><?php echo($advert['price']); ?> тг</span></h2>
+                <?php } ?>
+            </div>
+            <span class="rent_map">Долгосрочная аренда/<wbr>Возможен торг</span>
+            <address><?php echo($advert['location']); ?></address>
+            <div class="map">
+                <div id="map-canvas"> </div>
+                <ul class="contact_menu">
+                    <li class="phone get-phone-number"><a href="<?php echo($this->easyUrl(array('action' => 'phone', 'id' => $advert['id']))); ?>">Показать номер</a></li>
+                    <?php if (isset($userId) && (int)$userId > 0 && $advert['user_id'] != $userId) { ?>
+                        <li class="sms send-form-holder"><a class="hide-form" href="#">Написать сообщение</a></li>
+                        <?php echo($this->partial('partials/send-sms-form.phtml')); ?>
+                    <?php } ?>
+                    <li class="rating_autor">Рейтинг автора:<span> <?php echo(round($advert['avg_author_rating'],2));?></span></li>
+                </ul>
+            </div>
+        </div>
+        <section class="block">
+            <h2>Объявления автора</h2>
+            <article class="post group">
+                <div class="image_holder">
+                    <img src="/images/temp/image.jpg" alt="img">
+                </div>
+                <div class="text_info">
+                    <div class="article_title group">
+                        <span class="price">Цена:</span>
+                        <span class="sum">150 $</span>
+                        <span class="rent">долгосрочная аренда</span>
+                    </div>
+                    <address>Астана, ул. Чингиза Айтматова 20</address>
+                    <div class="article_bottom group">
+                        <a class="more" href="#">Подробнее</a>
+                    </div>
+                </div>
+            </article>
+            <a href="#" class="view">cмотреть все</a>
+        </section>
+        <section class="block last">
+            <?php if ($related !== null) { ?>
+            <h2>Похожие объявления</h2>
+                <?php foreach ($related as $item) { ?>
+                <article class="post group">
+                    <div class="image_holder">
+                        <?php if (!empty($item['img_id'])) { ?>
+                            <img src="<?php echo($this->easyUrl(array('controller' => 'image', 'action' => 'adverts-gallery', 'id' => $item['img_id'], 'w' => 142, 'h' => 113))) ?>" alt="#"/>
+                        <?php } else { ?>
+                            <img src="/images/tmp/postimg10.jpg" alt="#"/>
+                        <?php } ?>
+                    </div>
+                    <div class="text_info">
+
+                        <div class="article_title group">
+                            <?php if ($item['price'] > 0) {?>
+                            <span class="price">Цена:</span>
+                            <span class="sum"><?php echo ($item['price']); ?> тг</span>
+                            <span class="rent">долгосрочная аренда</span>
+                            <?php }?>
+                        </div>
+
+                        <address><?php echo ($item['location']); ?></address>
+                        <div class="article_bottom group">
+                            <a class="more" href="<?php echo($this->easyUrl(array('action' => 'view', 'id' => $item['id']))); ?>">Подробнее</a>
+                        </div>
+                    </div>
+                </article>
+                <?php } ?>
+            <?php } ?>
+        </section>
+</aside>
+<?php } else { ?>
+    <div class="main">
+        <div class="centered">
+            <h5 class=""> Данного объявления нет, либо оно не активировано </h5>
+            <div class="wrap">
+                <a href="" class="sbmt-gr sendIT">Назад</a>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+</div>
+</div>

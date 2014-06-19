@@ -1,0 +1,9 @@
+/**
+ * Use to URL:
+ *  /admin/catalog/add
+ *  /admin/catalog/add/*
+ */
+
+span[class^='star'],span[class*=' star']{
+    font-family:fantasy
+}

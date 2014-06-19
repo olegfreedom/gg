@@ -1,0 +1,11 @@
+<?php if (isset($bannersList) && is_array($bannersList)) { ?>
+    <ul>
+    <?php foreach ($bannersList as $item) { ?>
+        <li class="rubrics">
+            <a href="<?php echo($this->imageUrl($item['image'])); ?>" data-lightbox="gallery">
+                <img src="<?php echo($this->imageUrl($item['image'], 200, $item['height'], true)); ?>">
+            </a>
+        </li>
+    <?php } ?>
+    </ul>
+<?php }

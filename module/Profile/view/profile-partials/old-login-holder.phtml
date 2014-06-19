@@ -1,0 +1,18 @@
+<div class="login-holder<?php echo(($this->session('profile')->authId !== null) ? ' logged' : ''); ?>">
+    <?php if($this->session('profile')->authId !== null){ ?>
+            <ul class="for-logged-in-user group">
+                <li><a class="logged-in-name" href="<?php echo($this->easyUrl(array('module' => 'profile'))); ?>"><?php echo($this->session('profile')->authUsername); ?></a></li>
+                <li><a class="logged-in-name" href="<?php echo($this->easyUrl(array('module' => 'profile','controller' => 'wallet'))); ?>"><?php echo($this->session('profile')->balance !== null ? $this->session('profile')->balance : 0 ).' тг.' ; ?></a></li>
+                <li><a class="sms-amount" href="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'messages', 'action' => 'index'))); ?>">
+                        <?php if ((int)$this->session('profile')->messages > 0) { ?>
+                        <span class="sms-new-amount"><?php echo($this->session('profile')->messages); ?></span>
+                        <?php } ?>
+                    </a>
+                </li>
+                <li><a class="logged-in" href="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'login', 'action' => 'logout'))); ?>"></a></li>
+            </ul>
+    <?php }else{ ?>
+        <a class="btn-login log" href="#log_me_in">Вход</a>
+        <?php echo($this->partial('profile/login/index.phtml')); ?>
+    <?php } ?>
+</div>

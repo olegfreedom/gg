@@ -1,0 +1,11 @@
+<?php if($this->session()->categoryMenu !== null){ ?>
+<div class="nav_center">
+    <div class="nav_holder">
+        <ul class="navigation group">
+            <?php foreach($this->session()->categoryMenu as $item){ ?>
+            <li class="tabs<?php echo($item['id']); ?>"><a href="<?php echo ($this->easyUrl(array('controller' => $item['controller']))); ?>"><?php echo($item['name']); ?></a></li>
+            <?php } ?>
+        </ul>
+    </div>
+</div>
+<?php } ?>

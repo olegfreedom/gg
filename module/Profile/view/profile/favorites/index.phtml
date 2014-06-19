@@ -1,0 +1,91 @@
+<div class="wrapper">
+    <div class="wrapper-center">
+        <div class="container">
+            <h2 class="lk-title">Личный кабинет</h2>
+
+            <div class="lk">
+                <?php echo($this->partial('profile-partials/tabs-menu.phtml')); ?>
+                <div class="tab-content uslugi kab">
+                    <div id="tab4">
+                        <div class="tadv-lk">
+                            <?php if (!empty($advertsList)) { ?>
+                                <?php foreach ($advertsList as $item) { ?>
+                                    <div class="cards <?php echo ($item['top_css_class']); echo ($item['not_active_css_class']);?> <?php echo ($item['mark'] == 'y' ? 'marked' : '')?>">
+                                        <div class="info">
+                                            <span class="views"><?php echo($item['counter']); ?></span>
+                                            <span class="rating"><?php echo(($item['active_status'] == true) ? $item['rating'] : 0); ?></span>
+                                        </div>
+                                        <div class="item-content">
+                                            <div class="col">
+                                                <?php if (!empty($item['img_id'])) { ?>
+                                                    <img src="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'image', 'action' => 'adverts-gallery', 'id' => $item['img_id'], 'w' => 200, 'h' => 200))) ?>" alt="#"/>
+                                                <?php } else { ?>
+                                                    <img src="/images/tmp/postimg10.jpg" alt="#"/>
+                                                <?php } ?>
+                                                <span class="time"><?php echo date('d.m.Y', ($item['created'])); ?></span><?php /*TODO: временный вывод даты */ ?>
+                                            </div>
+                                            <div class="col">
+                                                <?php if ($item['status'] == 'y') { ?>
+                                                <a href="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'adverts', 'action' => 'view', 'id' => $item['id']))) ?>"><?php echo($item['name']); ?></a>
+                                                <?php } else { ?>
+                                                    <p><?php echo($item['name']); ?></p>
+                                                <?php } ?>
+                                                <ul>
+                                                    <li>                                                        
+                                                    <?php if (isset($item['breadcrumbs']) && is_array($item['breadcrumbs'])) { ?>
+                                                        <?php echo($this->partial('application/catalog/category/breadcrumbs.phtml', array('breadcrumbs' => $item['breadcrumbs']))); ?>
+                                                    <?php } else { ?>
+                                                        <a href="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'index', 'action' => 'category', 'id' => $item['category_id']))); ?>">
+                                                            <?php echo($item['category']); ?>
+                                                        </a>
+                                                    <?php } ?>
+                                                    </li>
+                                                </ul>
+                                                <?php if (!empty($item['location'])) { ?>
+                                                <span class="post-info-place">
+                                                    <em></em>
+                                                    <a href="#"><?php echo($item['location']); ?></a>
+                                                </span>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                        <div class="price-col">
+                                            <span class="prce">
+                                                <?php if ($item['price'] > 0) { ?>
+                                                <span class="symb"></span>
+                                                    <?php echo($item['price']); ?>
+                                                <?php } ?>
+                                            </span>
+                                        </div>
+                                        <div class="menu">
+                                            <?php if ($item['active_status'] == true) { ?>
+                                                <a href="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'adverts', 'action' => 'view', 'id' => $item['id']))) ?>">
+                                                    <div class="item">
+                                                        <i class="ico-up adverts-update-show"></i>
+                                                        <div class="submnu">
+                                                            <p>Перейти к объявлению</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            <?php } ?>
+                                                <a href="<?php echo($this->easyUrl(array('action' => 'remove', 'id' => $item['favorite_id']))) ?>">
+                                                    <div class="item action-remove" data-url="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'adverts', 'action' => 'view', 'id' => $item['id']))) ?>">
+                                                        <i class="ico-close"></i>
+                                                        <div class="submnu">
+                                                            <p>Убрать из избранного</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } else { ?>
+                            <p class="centered"> Список избранных объявлений пуст </p>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

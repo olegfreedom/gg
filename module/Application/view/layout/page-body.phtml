@@ -1,0 +1,24 @@
+<?php
+    $cssClass = '';
+    
+    if($this->routeNames('module') == 'profile'){
+        $cssClass = 'personal_account';
+    }else if($this->routeNames('module') == 'application'){
+        switch($this->session()->catalog){
+            case 'uslugi':
+                $cssClass = 'service-page';
+            break;
+            case 'avto':
+                $cssClass = 'auto-page';
+            break;
+            case 'nedvizhemost':
+                $cssClass = 'realty-page';
+            break;
+        }
+    }
+    
+    if(!empty($cssClass)){
+        $cssClass = ' class="'.$cssClass.'"';
+    }
+?>
+<body<?php echo($cssClass); ?>>

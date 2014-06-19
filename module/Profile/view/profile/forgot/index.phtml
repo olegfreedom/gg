@@ -1,0 +1,25 @@
+<div class="wrapper sms-page">
+	<div class="wrapper-center">
+        <div class="container centered">
+            <h3 class="reg-title">Введите эл.почту c которой Вы регистрировались на сайте.
+                <span>Дальнейшие инструкции будут высланы на Ваш e-mail.</span>
+            </h3>
+            <div class="regForm-holder bordered group add_advert">
+                <form autocomplete="off" method="post"  action="<?php echo($this->easyUrl(array('module' => 'profile' ,'controller' => 'forgot'))); ?>" class="forgot">
+                    <div class="wrap">
+                        <label for="inputUser">Эл. почта</label>
+                        <div class="input-holder">
+                            <input type="text" placeholder="Введите эл. почту" name="username" id="inputUser">
+                            <span class="errors">* Вы ввели несуществующий email</span>
+                        </div>
+                    </div>
+                    <div class="btn_holder">
+                        <a class="btn_search submitIt">отправить</a>
+                    </div>
+                    <input type="hidden" name="validator" value="<?php echo($this->easyUrl(array('module' => 'profile' ,'controller' => 'forgot', 'action' => 'validator'))); ?>">
+                    <input type="hidden" name="forgot-form" value="0">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

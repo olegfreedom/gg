@@ -1,0 +1,18 @@
+<a class="add-img">Добавить</a>
+<a class="delete">Сброс</a>
+<div class="input-holder">
+    <ul id="loading-content">
+        <li><input id="uploadbtn" onchange="extFilter()" name="gallery[]" multiple="multiple" type="file"/></li>
+    </ul>
+    <div id="uploaded-holder">
+        <div id="dropped-files">
+                <?php if(isset($getGallery) && $getGallery){ ?>
+                    <?php foreach($getGallery as $item) { ?>
+                        <li class="image uploaded" style="background: url('<?php echo($item['slider']['small']); ?>') no-repeat center center/cover  #fff;">
+                             <a href="<?php echo($this->easyUrl(array('action' => 'remove-gallery', 'advert' => $getEdit['id'], 'id' => $item['id']))) ?>" class="icon-remove gallery-remove-image" title="удалить"></a>
+                        </li>
+                    <?php } ?>
+                <?php } ?>
+        </div>
+    </div>
+</div>

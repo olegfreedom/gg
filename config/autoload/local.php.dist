@@ -1,0 +1,18 @@
+<?php
+/**
+ * Local Configuration Override
+ *
+ * Copy local.php.dist to local.php and configure.
+ */
+
+return array(
+   'db' => array(
+        'hostname'  => 'localhost',
+        'database'  => '.......',
+        'username'  => '.......',
+        'password'  => '.......'
+   ),
+   'site' => array(
+       'email' => 'info@chdev.com.ua'
+   )
+);

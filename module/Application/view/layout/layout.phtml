@@ -1,0 +1,62 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php
+            $this->headTitle($this->siteName())
+                 ->setSeparator(' - ')
+                 ->setAutoEscape(false);
+
+            echo($this->headTitle());
+        ?>
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+        <!-- styles and js -->
+        <?php
+           $this->headLink(array(
+                       'rel' => 'shortcut icon',
+                       'type' => 'image/png',
+                       'href' => $this->basePath() . '/images/favicon.png'
+                ))
+               ->appendStylesheet($this->basePath() . '/css/jcf.css')
+               ->appendStylesheet($this->basePath() . '/fonts/stylesheet.css')
+               ->appendStylesheet($this->basePath() . '/css/jquery.nouislider.min.css');
+
+           $this->headScript()
+                ->appendFile($this->basePath() . '/js/libs/jquery-1.9.0.min.js')
+                ->appendFile($this->basePath() . '/js/libs/jcf.js')
+                ->appendFile($this->basePath() . '/js/libs/raphael.js')
+                ->appendFile($this->basePath() . '/js/libs/raphyCharts.js')
+                ->appendFile($this->basePath() . '/js/libs/jcf.radio.js')
+//                ->appendFile($this->basePath() . '/js/libs/jcf.scrollable.js')
+                ->appendFile($this->basePath() . '/js/libs/jcf.select.js')
+                ->appendFile($this->basePath() . '/js/libs/jcf.select.multiple.js')
+                ->appendFile($this->basePath() . '/js/libs/jquery.openclose.js')
+                ->appendFile($this->basePath() . '/js/libs/modernizr-2.6.2.min.js')
+                ->appendFile($this->basePath() . '/js/libs/jquery.nouislider.js')
+                ->appendFile($this->basePath() . '/js/libs/jcf.file.js')
+                ->appendFile($this->basePath() . '/js/libs/rating.js')
+                ->appendFile($this->basePath() . '/js/libs/scrollGallery.js')
+                ->appendFile($this->basePath() . '/js/jquery.main.js')
+                ->appendFile($this->basePath() . 'js/libs/scrollGallery.js')
+                ->appendFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyBU4dkITmn5Vy9a_bNw6R8UTyVSIL1XKc4&sensor=true')
+                ->appendFile($this->basePath() . '/js/default.js');
+
+            $this->mediaLoader();
+
+            echo($this->headLink()."\n");
+            echo($this->headScript()."\n");
+        ?>
+    </head>
+    <?php echo($this->partial('application/layout/page-body')); ?>
+    <div id="wrapper">
+        <div class="w1">
+            <?php echo($this->partial('application/layout/header')); ?>
+            <?php echo($this->content); ?>
+            <!-- /container -->
+        </div>
+    </div>
+    <?php echo($this->partial('application/layout/footer')); ?>
+    <?php echo($this->inlineScript()); ?>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<div class="wrapper">
+    <div class="wrapper-center">
+        <div class="container">
+            <div class="lk">
+            <?php echo($this->partial('profile-partials/tabs-menu.phtml')); ?>
+            <div class="tab-content">
+                <section class="tab-item">
+                    <div class="section-content">
+                        <h1 class="section-heading">Баланс: <?php echo(isset($userBalance) ? $userBalance : 0); ?> тг.</h1>
+                        <form action="https://3dsecure.kkb.kz/jsp/process/logon.jsp" class="form balance-update" method="post">
+                            <fieldset>
+                                <h2>Пополнение баланса</h2>
+                                <div class="row-holder">
+                                    <div class="row">
+                                        <label>Сумма пополнения: </label>
+                                        <input type="text" class="balance-count-input num-only" name="amount" value="100" maxlength="20" />
+                                        <span class="balance-box">                                            
+                                            <span class="up-balance"></span>
+                                            <span class="down-balance"></span>
+                                        </span>
+                                    </div>
+                                    <div class="row accept-box">
+                                        <input type="checkbox" id="accept-checkbox" name="accept" value="1" >
+                                        <label>С условиями <a href="<?php echo($this->easyUrl(array('module' => 'application','controller' => 'payment-agreement'))); ?>">Договора</a> ознакомлен и согласен</label>
+                                    </div>
+                                </div>
+                                <div class="submit-holder">
+                                    <input type="submit" value="Перейти к оплате">
+                                </div>
+                            </fieldset>
+                            <input type="hidden" name="status" value="0">
+                            <input type="hidden" name="getcontent" value="<?php echo($this->easyUrl(array('controller' => 'wallet', 'action' => 'get-content'))); ?>">
+                            <input type="hidden" name="Signed_Order_B64" value="">
+                            <input type="hidden" name="Language" value="rus">
+                            <input type="hidden" name="BackLink" value="<?php echo($this->easyUrl(array('module' => 'profile','controller' => 'wallet', 'action' => 'success'))); ?>">
+                            <input type="hidden" name="FailureBackLink" value="<?php echo($this->easyUrl(array('module' => 'profile','controller' => 'wallet', 'action' => 'error'))); ?>">
+                            <input type="hidden" name="email" value="<?php echo ($username); ?>">
+                            <input type="hidden" name="PostLink" value="<?php echo($this->easyUrl(array('module' => 'profile','controller' => 'wallet', 'action' => 'postlink'))); ?>">
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

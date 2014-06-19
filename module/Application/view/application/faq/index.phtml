@@ -1,0 +1,80 @@
+<div id="wrapper">
+    <div class="w1">
+        <div id="main">       
+            <div class="main-content-holder group">
+                <h1>
+                    <span>FAQ</span>
+                </h1>
+                <strong class="subtitle">Продать быстрее, что делать?<br><strong
+                    >Воспользуйтесь нашими услугами, и будьте на шаг впереди!</strong>
+                </strong>
+                <ul class="list_ads">
+                    <li>
+                        <img src="/images/faq_img1.png" alt="img">
+                        <strong>Топ-<wbr>объявление</strong>
+                        <p>Разместите объявление в Топ и получите в десятки раз больше просмотров и обращений</p>
+                    </li>
+                    <li>
+                        <img src="/images/faq_img2.png" alt="img">
+                        <strong>Выделенное объявление</strong>
+                        <p>Выделите объявление фоновым цветом, чтобы выгодно отличаться от конкурентов</p>
+                    </li>
+                    <li>
+                        <img src="/images/faq_img3.png" alt="img">
+                        <strong>Срочное<br>объявление</strong>
+                        <p>Пометьте объявление знаком «Срочно», чтобы сделать его максимально заметным</p>
+                    </li>
+                    <li>
+                        <img src="/images/faq_img4.png" alt="img">
+                        <strong>Поднятие<br>объявления</strong>
+                        <p>Поднимите объявление в самый верх списка над всеми бесплатными объявлениями</p>
+                    </li>
+
+                </ul>
+                <section>
+                    <?php if ($faqList) { ?>
+                        <?php foreach($faqList as $item) { ?>
+                            <article class="rubric">
+                                <div class="fl-<?php echo($item['img_position']); ?>">
+                                    <img alt="#" src="/images/faq_article<?php echo ($item['id']); ?>.png">
+                                </div>
+                                <div class="text fl-<?php echo($item['text_position']); ?>">
+                                    <h2><?php echo($item['title']); ?></h2>
+                                    <p><?php echo ($item['content']); ?></p>
+                                </div>
+                            </article>
+                        <?php } ?>
+                    <?php } ?>              
+                </section>
+            </div>
+        </div>
+        <div class="top-raising">
+            <div class="top-raising-holder">
+                <h3>Сколько стоит разместить ТОП-объявление</h3>
+                <ul>
+                    <li>
+                        <a class="price1" href="#">
+                            <span>7 дней</span>
+                            <em>150 тг</em>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="price2" href="#">
+                            <span>15 дней</span>
+                            <em>190 тг</em>
+                        </a>
+                    </li>
+                    <li class="last">
+                        <a class="price3" href="#">
+                            <span>30 дней</span>
+                            <em>200 тг</em>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn_holder">
+            <a class="btn_search">Подать объявление</a> <!-- TODO: ссылка для подачи объявления -->
+        </div>
+    </div>
+</div>

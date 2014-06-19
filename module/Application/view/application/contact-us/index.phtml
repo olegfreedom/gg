@@ -1,0 +1,45 @@
+<div class="wrapper pages">
+    <div class="wrapper-center">
+        <div class="container">
+            <div class="content">
+                <div class="descr-container">
+                    <h1>Обратная связь</h1>
+                    <p><?php echo $content['content'] ?></p>
+                </div>   
+                <div id="popup1">
+                    <section class="popup-opinion">
+                        <form class="contact-us-form" action="<?php echo($this->easyUrl(array('action' => 'add'))); ?>" method="post">
+                            <div class="col">
+                                <div class="row">
+                                    <label for="name">Представьтесь</label>
+                                    <div class="input-holder">
+                                        <input id="name" name="name" type="text" placeholder="Введите Ваше имя" <?php echo ($currentUser['readonly']);?> value="<?php echo ($currentUser['name']); ?>"/>
+                                        <span>* Проверьте правильность ввода</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="mail">Эл.почта</label>
+                                    <div class="input-holder">
+                                        <input id="mail" name="email" type="text" placeholder="Введите эл. почту" <?php echo ($currentUser['readonly']);?> value="<?php echo ($currentUser['username']); ?>"/>
+                                        <span>* Проверьте правильность ввода</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="message">Сообщение</label>
+                                <div class="input-holder">
+                                    <textarea name="message" id="comment" cols="30" rows="10" placeholder="Введите Ваш комментарий"></textarea>
+                                    <span>* Проверьте правильность ввода. Допустимая длина от 5 до 1000 символов</span>
+                                </div>
+                            </div>
+                            <button class="sbmt-gr" value="подобрать" type="submit">отправить</button>
+                            <input type="hidden" name="validator" value="<?php echo($this->easyUrl(array('action' => 'validator'))); ?>">
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <aside>
+        </aside>
+    </div>
+</div>

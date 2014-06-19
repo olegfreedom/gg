@@ -1,0 +1,214 @@
+<div class="wrapper">
+    <div class="wrapper-center">
+        <div class="container">
+            <form class="srch"
+                  action="<?php echo($this->easyUrl(array('controller' => 'catalog-'.$this->session()->catalog, 'action' => 'index', 'type' => $advertsType))); ?>"
+                  method="post">
+                <?php echo($this->partial('/partials/main-holder.phtml')); ?>
+            </form>
+
+            <?php if ($advert) { ?>
+            
+            <div class="main">
+                <section class="img-slider">
+                    <?php echo($this->partial('partials/star-favourite.phtml')); ?>
+                    <h2><?php echo($advert['name']); ?></h2>
+                    <?php echo($this->partial('partials/slides-gallery-list.phtml')); ?>
+                </section>
+                <div class="descr-container breadcrumb">
+                    <?php if(isset($advert['breadcrumbs']) && is_array($advert['breadcrumbs'])){ ?>
+                        <?php echo($this->partial('partials/breadcrumbs.phtml', array('breadcrumbs' => $advert['breadcrumbs']))); ?>
+                    <?php }else{ ?> 
+                        <a href="<?php echo($this->easyUrl(array('category' => $item['category_id']))); ?>"><?php echo($advert['category']); ?></a>
+                    <?php } ?> 
+                </div>
+                <div class="descr-container">
+                    <p><?php echo($advert['description']); ?></p>
+                </div>
+                <div class="options-container">
+                    <?php if ($advertOptions) { ?>
+                        <?php foreach ($advertOptions as $item) { ?>
+                            <p><strong><?php echo($item['option_name']); ?></strong> :
+                            <?php if($item['option_type'] == 'checkbox') { ?>
+                                <?php echo ($item['option_value'] == 'y' ? 'да' : 'нет') ?>
+                            <?php } else if (is_array($item['option_value'])) { ?>
+                                <?php foreach ($item['option_value'] as $option) { ?>
+                                    <?php echo ($option['name'].(end($item['option_value']) !== $option ? ', ' : '')); ?>
+                                <?php } ?>
+                            <?php } else {?>
+                                <?php echo ($item['option_value']); ?>
+                            <?php } ?>
+                            </p>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+
+            <div id="testimonialsForm" class="content">
+                <div id="popup1">
+                    <section class="popup-opinion">
+                        <form class="add-testimonial-comment" action="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'testimonials', 'action' => 'add'))); ?>" method="post">
+                            
+                            <?php if ($advert['user_id'] != $userId) { ?>
+                            
+                            <div class="col">
+                                <div class="row">
+                                    <label for="comment-name">Ваше имя</label>
+                                    <input id="comment-name"<?php echo ($currentUser['readonly']);?> value="<?php echo ($currentUser['name']); ?>" name="name" type="text" placeholder="Имя и фамилия"/>
+                                </div>
+                                <div class="row">
+                                    <label for="comment-mail">Эл.почта</label>
+                                    <input id="comment-mail"<?php echo ($currentUser['readonly']);?> value="<?php echo ($currentUser['username']); ?>" name="email" type="text" placeholder="Введите эл. почту"/>
+                                </div>
+                                <div class="row">
+                                    <div class="testi-star">
+                                        <?php echo($this->partial('partials/rating-testimonial.phtml')); ?>                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="comment-message">Отзыв</label>
+                                <textarea name="message" id="comment-message" cols="30" rows="10" placeholder="Ваш комментарий"></textarea>
+                            </div>
+                            <button class="sbmt-gr" value="подобрать" type="submit">отправить</button>
+                            <input type="hidden" value="<?php echo($this->easyUrl(array('controller' => 'testimonials','action' => 'validator'))); ?>" name="validator">
+                            <input type="hidden" value="<?php echo($advert['id']); ?>" name="advert_id">
+                           
+                            <?php } else { ?>
+                                <p> Вы не можете оставить отзыв на данное объявление </p> 
+                            <?php } ?>
+                            
+                            <div class="testimonials-list">
+                                <?php foreach($advertComments as $item) {?>
+                                <div class="item" id="testimonial-<?php echo($item['id']); ?>">
+                                    <strong class="title"><?php echo($item['name']); ?>, <?php echo($item['date']);?></strong>
+                                    <p><?php echo($item['message']); ?></p>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+            </div>
+            
+            <aside>
+                <section class="banner form-searching">
+                    <?php if ($advert['price'] > 0) {?>
+                        <h2 class="issues banner-rating"><?php echo($advert['price']); ?></h2>
+                        <span>Торг возможен</span>
+                    <?php } ?>
+
+                    <div class="t-dotted centered">
+                        <h3 class="form-searching-title-nohover"><em class="t-place"></em>Местонахождение</h3>
+                        <p><?php echo($advert['location']); ?></p>
+                    </div>
+                    <div class="t-dotted centered">
+                        <h3 class="form-searching-title-nohover"><em class="t-star"></em>Рейтинг автора</h3>
+                        <span class="definition"><?php echo(round($advert['avg_author_rating'],2));?></span>
+                    </div>
+                    <div class="t-dotted centered last">
+                        <h3 class="form-searching-title-nohover"><em class="t-rate"></em>Отзывов</h3>
+                        <span class="definition"><?php echo($advert['testimonial_count']); ?></span>
+                    </div>
+                </section>
+
+                <section class="banner form-searching">
+                    <h2 class="issues banner-contacts">Контакты</h2>
+
+                    <div class="t-dotted centered last">
+                        <h3 class="form-searching-title-nohover"><em class="t-tel"></em>Номер телефона</h3>
+
+                        <div class="value">
+                            <p>xxxxxxxxxxxx</p>
+                            <a class="get-phone-number" href="<?php echo($this->easyUrl(array('action' => 'phone', 'id' => $advert['id']))); ?>">показать номер</a>
+                        </div>
+                    </div>
+                    
+                    <?php if (isset($userId) && (int)$userId > 0 && $advert['user_id'] != $userId) { ?>
+                        <div class="t-dotted centered last send-form-holder-h">
+                            <h3 class="form-searching-title"><em class="t-sms"></em><a class="send-sms">Сообщение автору</a></h3>
+                            <?php echo($this->partial('partials/send-sms-form.phtml')); ?>
+                        </div>
+                    <?php } ?>
+                </section>
+
+                <section class="banner form-searching">
+                    <div class="t-dotted centered last">
+                        <h3 class="form-searching-title-nohover">Оценка качества услуг</h3>
+
+                        <div class="wrap">
+                            <div class="testi-star rating-static">
+                                <div class="rating-testimonial-box">
+                                    <div class="rating-testimonial no-rate">
+                                        <input name="val" value="<?php echo ($advert['avg_rating']); ?>" type="hidden">
+                                    </div>
+                                    <input type="hidden" name="rate" class="rating-vote-score" value="0"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+            <?php if ($related !== null) { ?>
+                <section class="gallery-bottom-holder">
+                    <h2>Похожие объявления</h2>
+
+                    <div class="galleryka-holder carousel1">
+                        <div class="galleryka">
+                            <div class="gholder">
+                                <a class="btn-prev" href="#">&lt;</a>
+                                <a class="btn-next" href="#">&gt;</a>
+
+                                <div class="gmask-center">
+                                    <div class="gmask">
+                                        <ul>
+                                            <?php foreach ($related as $item) { ?>
+                                                <li class="c1 active">
+                                                    <div class="post-info">
+                                                        <a href="<?php echo($this->easyUrl(array('action' => 'view', 'id' => $item['id']))); ?>">
+                                                            <div class='related-header'><?php echo ($item['name']); ?></div>
+                                                        </a><?php /* TODO: Временно добалено ссылки для перехода на объявление */ ?>
+                                                        <?php if (!empty($item['img_id'])) { ?>
+                                                            <img src="<?php echo($this->easyUrl(array('controller' => 'image', 'action' => 'adverts-gallery', 'id' => $item['img_id'], 'w' => 100, 'h' => 100))) ?>" alt="#"/>
+                                                        <?php } else { ?>
+                                                            <img src="/images/tmp/postimg10.jpg" alt="#"/>
+                                                        <?php } ?>
+                                                        <div>
+                                                            <span class="post-info-place">
+                                                                <em></em>
+                                                                <span class="city">
+                                                                    <?php echo ($item['location']); ?>
+                                                                </span>
+                                                                <?php if ($item['price'] > 0) {?>
+                                                                <span class="prce">
+                                                                    <?php echo ($item['price']); ?>
+                                                                    <span class="symb"></span>
+                                                                </span>
+                                                                <?php }?>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            <?php } ?>
+            <?php } else { ?>
+            <div class="main">
+                <div class="centered">
+                    <h5 class=""> Данного объявления нет, либо оно не активировано </h5>
+                    <div class="wrap">
+                        <a href="<?php echo($this->easyUrl(array('controller' => 'catalog'))) ?>" class="sbmt-gr sendIT">Назад</a>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
+            <!-- /container -->
+        </div>
+    </div>
+</div>

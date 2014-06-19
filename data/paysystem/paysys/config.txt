@@ -1,0 +1,8 @@
+MERCHANT_CERTIFICATE_ID = "00C182B189"	 	; Ñåðèéíûé íîìåð ñåðòèôèêàòà Cert Serial Number
+MERCHANT_NAME = "Test shop"			; Íàçâàíèå ìàãàçèíà (ïðîäàâöà) Shop/merchant Name
+PRIVATE_KEY_FN = "/data/paysystem/paysys/test_prv.pem"	; Ïóòü ê çàêðûòîìó êëþ÷ó Private cert path
+PRIVATE_KEY_PASS = "nissan"			; Ïàðîëü ê çàêðûòîìó êëþ÷ó Private cert password
+XML_TEMPLATE_FN = "/data/paysystem/paysys/template.xml"	; Ïóòü ê XML øàáëîíó XML template path
+XML_COMMAND_TEMPLATE_FN = "/data/paysystem/paysys/command_template.xml"	; Ïóòü ê XML øàáëîíó äëÿ êîìàíä (âîçâðàò/ïîäòâåðæäåíèå)
+PUBLIC_KEY_FN = "/data/paysystem/paysys/kkbca.pem"		; Ïóòü ê îòêðûòîìó êëþ÷ó Public cert path
+MERCHANT_ID="92061101"				; Òåðìèíàë ÈÄ â áàíêîâñêîé Ñèñòåìå

@@ -1,0 +1,39 @@
+<div class="login-holder<?php echo($this->session('profile')->authId !== null ? ' logged' : ''); ?>">
+    <?php if($this->session('profile')->authId !== null){ ?>
+        <ul class="for-logged-in-user group">
+            <li><a class="logged-in-name" href="<?php echo($this->easyUrl(array('module' => 'profile'))); ?>"><?php echo($this->session('profile')->authUsername); ?></a></li>
+            <li><a class="logged-in-name" href="<?php echo($this->easyUrl(array('module' => 'profile','controller' => 'wallet'))); ?>"><?php echo($this->session('profile')->balance !== null ? $this->session('profile')->balance : 0 ).' тг.' ; ?></a></li>
+            <li><a class="sms-amount" href="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'messages', 'action' => 'index'))); ?>">
+                    <?php if ((int)$this->session('profile')->messages > 0) { ?>
+                        <span class="sms-new-amount"><?php echo($this->session('profile')->messages); ?></span>
+                    <?php } ?>
+                </a>
+            </li>
+            <li><a class="logged-in" href="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'login', 'action' => 'logout'))); ?>"></a></li>
+        </ul>
+    <?php }else{ ?>
+    <a class="btn-login">Вход</a>
+    <form action="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'login'))); ?>" method= "post" class="popup_form login-form">
+        <fieldset>
+            <div class="row">
+                <label for="inputUser">Эл. почта</label>
+                <input id="inputUser" type="text" name="username" maxlength="100">
+            </div>
+            <div class="row">
+                <label for="inputPassword">Ваш пароль</label>
+                <input id="inputPassword" type="password" name="password" maxlength="100">
+            </div>
+            <div class="row"><input type="checkbox" name="remember" checked="checked" value="y" id="remember"><label for="remember">Запомнить меня</label></div>
+            <div class="submit-holder">
+                <input type="submit" value="Войти" class="btn_search">
+            </div>
+            <div class="add_buttons group">
+                <a class="btn_registration" href="<?php echo ($this->easyUrl(array('module' => 'profile', 'controller' => 'registration'))); ?>">Регистрация</a>
+                <a class="btn_forgot" href="<?php echo ($this->easyUrl(array('module' => 'profile', 'controller' => 'forgot'))); ?>">Забыли пароль?</a>
+            </div>
+            <input type="hidden" name="validator" value="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'login', 'action' => 'validator'))); ?>">
+            <input type="hidden" name="login-form" value="0">
+        </fieldset>
+    </form>
+    <?php } ?>
+</div>

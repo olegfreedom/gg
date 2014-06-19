@@ -1,0 +1,10 @@
+/**
+ * Use to URL:
+ *  /
+ *  /index
+ *  /index/*
+ */
+
+.noUi-handle span {
+    display: none;
+}

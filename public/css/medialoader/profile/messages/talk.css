@@ -1,0 +1,24 @@
+/**
+ * Use to URL:
+ *  /profile/messages/talk
+ *  /profile/messages/talk/*
+ */
+
+.submit_talk {
+    background: none repeat scroll 0 0 #EFC312;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: 18px/21px 'Conv_Roboto-Regular',Arial,Helvetica,Verdana,sans-serif;
+    padding: 8px 23px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    outline: medium none;
+    float: right;
+}
+
+.submit_talk:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}

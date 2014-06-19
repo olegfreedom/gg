@@ -1,0 +1,37 @@
+<?php if($getOrders){ ?>
+<div class="row-fluid">
+    <div class="col">      
+        <table class="table table-striped table-bordered">
+            <thead>        
+                <tr>
+                    <th>Дата</th>
+                    <th>Номер заказа</th>
+                    <th>Пользователь</th>
+                    <th>Сумма</th>
+                    <th class="status-box">Статус платежа</th>
+                </tr>
+            </thead>
+            <?php foreach($getOrders as $item){ ?>
+            <tr>
+                <td><?php echo($item['timestamp']); ?></td>
+                <td><?php echo(sprintf ("%06d",$item['id'])); ?></td>
+                <td>
+                    <a href="<?php echo($this->easyUrl(array('controller' => 'users', 'action' => 'edit', 'id' => $item['user_id']), array(), true)) ?>" title="редактор пользователя"><?php echo($item['username']); ?></a>
+                </td>
+                <td><?php echo($item['amount']); ?></td>
+                <td class="status-box">
+                    <a href="<?php echo($this->easyUrl(array('action' => 'change-status', 'id' => $item['id']), array(), true)) ?>" title="сменить статус">
+                      <?php if($item['status']=='n'){ ?>
+                          <span class="label label-important">Неоплачено</span>
+                      <?php }else{ ?>
+                    </a>
+                    <span class="label label-success">Оплачено</span>
+                    <?php } ?>
+                </td>
+            </tr>
+            <?php } ?> 
+        </table>
+        <?php echo($this->partial('admin-partials/paginator.phtml', array('paginator' => $paginator))); ?>
+    </div>
+</div>
+<?php } ?>

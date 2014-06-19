@@ -1,0 +1,164 @@
+<div class="wrapper">
+    <div class="wrapper-center">
+        <div class="container">
+            <h2 class="lk-title">
+                <?php echo((isset($isGuest) && $isGuest == true) ? 'Добавление объявления' : 'Личный кабинет'); ?>
+            </h2>
+            <div class="lk">
+                <?php if(!isset($isGuest)){ ?>
+                    <?php echo($this->partial('profile-partials/tabs-menu.phtml')); ?>
+                <?php } ?>
+                <div class="tab-content uslugi form-tab<?php echo((isset($isGuest) && $isGuest == true) ? ' guest' : ''); ?>">
+                    <div id="tab1">
+                        <form id="frm" class="form-validator add helper" action="<?php echo($this->easyUrl(array('action' => 'add'))); ?>" method="post" enctype="multipart/form-data">
+                            <div class="wrap t-dotted">
+                            <div class="wrap">
+                                <label for="tadv-rubr">Раздел<span>*</span></label>
+                                <div class="input-holder helper">
+                                    <select class="helper-item" id="tadv-rubr" name="mainCategory">
+                                        <?php foreach ($mainCategory as $item) { ?>
+                                            <option value="<?php echo($item['url']); ?>"><?php echo($item['name']); ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <span class="errors">* Заполните обязательное поле</span>
+                                    <div class="helper-box">
+                                        <span class="ico-help">?</span><?php echo(isset($helper['type']) ? $helper['type'] : ''); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrap">
+                                <label for="tadv-rubr">Ищу / предлагаю<span>*</span></label>
+                                <div class="input-holder helper type">
+                                    <select class="helper-item type" id="tadv-rubr" name="type_id">
+                                        <?php foreach ($getType as $item) { ?>
+                                            <option value="<?php echo($item['id']); ?>"><?php echo($item['name']); ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <span class="errors">* Заполните обязательное поле</span>
+                                    <div class="helper-box">
+                                        <span class="ico-help">?</span><?php echo(isset($helper['type']) ? $helper['type'] : ''); ?>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="wrap">
+                                    <label for="tadv-title">Заголовок<span>*</span></label>
+                                    <div class="input-holder helper">
+                                        <input class="helper-item" maxlength="50" id="tadv-title" value="" name="name" type="text" placeholder="Введите заголовок обьявления"/>
+                                        <span class="errors">* Заполните обязательное поле</span>
+
+                                        <div class="helper-box">
+                                            <span class="ico-help">?</span><?php echo(isset($helper['name']) ? $helper['name'] : ''); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrap">
+                                    <label for="tadv-rubr">Рубрика<span>*</span></label>
+                                    <div class="input-holder helper category">
+                                        <select class="helper-item category" id="tadv-rubr" name="category_id">
+                                            <?php echo($this->partial('admin/catalog/category/add-category-select.phtml', array('categoryList' => $getCategory, 'tab' => '', 'disabled' => true))); ?>
+                                        </select>
+                                        <span class="errors">* Заполните обязательное поле</span>
+
+                                        <div class="helper-box">
+                                            <span class="ico-help">?</span><?php echo(isset($helper['category']) ? $helper['category'] : ''); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrap">
+                                <label for="tadv-desc" class="option">Подрубрика</label>
+                            </div>
+                            <div class="wrap options">
+
+                            </div>
+                            <div class="wrap">
+                                <label for="tadv-desc">Описание<span class="req require-description">*</span></label>
+                                <div class="input-holder helper">
+                                    <textarea class="helper-item" name="description" id="tadv-desc" cols="30" rows="10"></textarea>
+                                    <span class="errors">* Заполните обязательное поле</span>
+                                    <div class="helper-box">
+                                        <span class="ico-help">?</span><?php echo(isset($helper['description']) ? $helper['description'] : ''); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrap img">
+                                <label>Фото<span class="hlp">Объявления с фото получают в среднем в 3-5 раз больше откликов</span></label>
+                                <?php echo($this->partial('profile-partials/gallery-upload-box.phtml')); ?>
+                            </div>
+                            <div class="wrap">
+                                <label for="tadv-price">Цена<span class="req require-price">*</span></label>
+                                <div class="input-holder price helper">
+                                    <input class="helper-item num-only" name="price" id="tadv-price" value="" type="text"/>
+                                    <select name="currency" class="small ">
+                                        <?php foreach ($getCurrency as $item) { ?>
+                                            <option value="<?php echo($item['id']); ?>"><?php echo($item['name']); ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <div class="helper-box half">
+                                        <span class="ico-help">?</span><?php echo(isset($helper['price']) ? $helper['price'] : ''); ?>
+                                    </div>
+                                    <span class="errors">* Заполните обязательное поле</span>
+                                </div>
+                            </div>
+                            <div class="wrap">
+                                <label for="tadv-reg">Регион<span>*</span></label>
+                                <div class="input-holder helper">
+                                    <select class="helper-item region" id="tadv-reg" name="region">
+                                        <option value='0'>Все регионы</option>
+                                        <?php foreach ($getLocation as $item) { ?>
+                                            <option value="<?php echo($item['id']); ?>"><?php echo($item['name']); ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <div class="helper-box">
+                                        <span class="ico-help">?</span><?php echo(isset($helper['location']) ? $helper['location'] : ''); ?>
+                                    </div>
+                                    <span class="errors">* Заполните обязательное поле</span>
+                                </div>
+                            </div>
+                            <div class="wrap">
+                                <label for="tadv-reg">Город<span>*</span></label>
+
+                                <div class="input-holder cities">
+
+                                </div>
+                            </div>
+                            <?php echo($this->partial('profile-partials/phone-box.phtml')); ?>
+                            <div class="wrap">
+                                <label for="tadv-owner">Контактное лицо<span>*</span></label>
+                                <div class="input-holder helper">
+                                    <input class="helper-item" id="tadv-owner" type="text" name="contact_name" value="<?php echo(($userName !== null) ? $userName : ''); ?>"/>
+                                    <span class="errors">* Заполните обязательное поле</span>
+
+                                    <div class="helper-box half">
+                                        <span class="ico-help">?</span><?php echo(isset($helper['contact_name']) ? $helper['contact_name'] : ''); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php if(isset($isGuest) && $isGuest == true){ ?>
+                            <div class="wrap">
+                                <label for="tadv-owner">Ваш E-mail<span>*</span></label>
+                                <div class="input-holder helper">
+                                    <input class="helper-item" id="tadv-owner" type="email" name="email" value=""/>
+                                    <span id="email-error" class="errors">* Заполните обязательное поле</span>
+
+                                    <div class="helper-box half">
+                                        <span class="ico-help">?</span><?php echo(isset($helper['email']) ? $helper['email'] : ''); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <input type="hidden" name="add-form" value="0">
+                            <input type="hidden" name="validator" value="<?php echo($this->easyUrl(array('action' => 'validator'))); ?>">
+                            <input type="hidden" name="load_options" value="<?php echo($this->easyUrl(array('action' => 'load-options'))); ?>">
+                            <input type="hidden" name="require-url" value="<?php echo $this->easyUrl(array('action' => 'get-fields')); ?>">
+                            <input type="hidden" name="location_url" value="<?php echo($this->easyUrl(array('action' => 'getCity'))); ?>">
+                            <input type="hidden" name="getCategories_url" value="<?php echo($this->easyUrl(array('action' => 'getCategories'))); ?>">
+                            <input type="hidden" name="catalog" value="<?php echo($catalogName); ?>">
+                        </form>
+                        <a class="submitIt" type="submit" href="#">Добавить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

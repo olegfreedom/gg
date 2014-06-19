@@ -1,0 +1,32 @@
+<div id="log_me_in" class="popup login-form">
+    <section class="popup-log-me">
+        <h1>
+            Вход на сайт
+        </h1>
+        <form action="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'login'))); ?>" method= "post" class="popup login-form">
+            <div class="form-holder">
+                <div class="row">
+                    <label for="email">Эл. почта</label>
+                    <input id="inputUser" type="text" name="username" maxlength="50" value="" placeholder="Введите адрес электронной почты">
+                </div>
+                <div class="row">
+                    <label for="message">Ваш пароль</label>
+                    <input id="inputPassword" type="password" name="password" maxlength="50" value="" placeholder="Введите ваш пароль">
+                </div>
+                <div class="row group">
+                    <input id="remember" name="remember" type="checkbox" checked="checked" value="y">
+                    <label class="positioned" for="remember">Запомнить меня</label>
+                </div>
+            </div>
+            <div class="wrap centered add-pad">
+                <input class="sbmt-gr" type="submit" value="Войти">
+            </div>
+            <div class="wrapper centered">
+                <a class="btn-styled" href="<?php echo($this->easyUrl(array('module' => 'profile' ,'controller' => 'registration'))); ?>">Регистрация</a>
+                <a class="btn-styled" href="<?php echo($this->easyUrl(array('module' => 'profile' ,'controller' => 'forgot'))); ?>">Забыли пароль</a>
+            </div>
+            <input type="hidden" name="validator" value="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'login', 'action' => 'validator'))); ?>">
+            <input type="hidden" name="login-form" value="0">
+        </form>
+    </section>
+</div>

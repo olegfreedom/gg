@@ -1,0 +1,346 @@
+<div id="main">       
+    <div class="main-content-holder group">
+        <h1>
+            <span>личный кабинет</span>
+        </h1>
+        <?php echo($this->partial('profile-partials/tabs-menu.phtml')); ?>
+        <section class="block">
+            <?php if (!empty($advertsList)) { ?>
+                <?php foreach ($advertsList as $item) { ?>
+                <article class="post king group">
+                    <div class="post_holder group">
+                        <div class="image_holder">
+                            <img src="<?php echo($this->imageUrl($item['img_url'], 161, 152, true)); ?>" alt="">
+                            <?php if($item['is_top'] === true){ ?>
+                            <div class="block_king"></div>
+                            <?php } ?>
+                        </div>
+                        <div class="text_info">
+                            <div class="article_title group">
+                                <?php if ($item['price'] > 0) { ?>
+                                    <span class="price">Цена:&nbsp;</span>
+                                    <span class="sum"><?php echo($item['price'].' '.$item['currency']); ?></span>
+                                <?php } ?>
+                                <span class="urgently">срочно</span>
+                                <span class="rent">долгосрочная аренда</span>
+                            </div>
+                            <div class="left_align">
+                                <?php if(!empty($item['location'])){ ?>
+                                <address><?php echo($item['location']); ?></address>
+                                <?php } ?>
+                                <div class="text_holder group">
+                                    <div class="col">
+                                        <p>Тип строения: <span class="description">кирпичь</span></p>
+                                        <p>Общая площадь: <span class="description">116 кв/м</span></p>
+                                        <p>Прил.Территория: <span class="description">400 кв/м</span></p>
+                                    </div>
+                                    <div class="col">
+                                        <p>Год: <span class="description year">1992</span><span class="motion">Этажи:</span> <span class="description">2</span></p>
+                                        <p>Состояние: <span class="description">хорошее</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right_align group">
+                                <ul class="block_view">
+                                    <li><span class="numeric"><?php echo($item['counter']); ?></span> просмотров</li>
+                                    <li class="block2"><span class="numeric"><?php echo($item['rating_text']); ?></span> место в списке</li>
+                                </ul>
+                                <div class="btn_wrapper group">
+                                    <div class="pencil">
+                                        <a href="<?php echo($this->easyUrl(array('action' => 'edit', 'id' => $item['id']))) ?>" class="btn_manage"></a>
+                                    </div>
+                                    <div class="del">
+                                        <a href="<?php echo($this->easyUrl(array('action' => 'remove', 'id' => $item['id']))) ?>" class="btn_manage advert-delete-link"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating_holder">
+                        <div class="list remains<?php echo(($item['is_top'] === true) ? ' selected' : ''); ?>">
+                            <div class="popup_holder">
+                                <a href="#">
+                                    <?php if($item['is_top'] === true){ ?>
+                                        в топе <span class="remain_time"><?php echo($item['top_days_left'].' '.$item['top_days_text']); ?></span>
+                                    <?php }else{ ?>
+                                        в топ
+                                    <?php } ?>
+                                </a>
+                                <div class="popup">
+                                    <strong class="text_popup">Услуга <wbr>В ТОП<wbr> платная</strong> 
+                                    <div>
+                                        <span>Стоимость услуги - <b>100 ТГ</b></span> 
+                                        <span>На счету - <b><?php echo($this->session('profile')->balance !== null ? $this->session('profile')->balance : 0 ); ?> тг</b></span>
+                                    </div>
+                                    <div class="btn_holder">
+                                        <a class="btn_search">Оплатить</a>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                        <div class="list list_up">
+                            <div class="popup_holder">
+                                <a href="#" >поднять вверх</a>
+                                <div class="popup">
+                                    <strong class="text_popup">Услуга ПОДНЯТЬ ВВЕРХ платная</strong> 
+                                    <div>
+                                        <span>Стоимость услуги - <b>100 ТГ</b></span> 
+                                        <span>На счету - <b><?php echo($this->session('profile')->balance !== null ? $this->session('profile')->balance : 0 ); ?> тг</b></span>
+                                    </div>
+                                    <div class="btn_holder">
+                                        <a class="btn_search">Оплатить</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list list_select<?php echo(($item['mark'] === 'y') ? ' selected' : ''); ?>">
+                            <div class="popup_holder">
+                                <a href="#">
+                                    <?php if($item['mark'] === 'y'){ ?>
+                                        выделенно <span class="remain_time"><?php echo($item['mark_days_left'].' '.$item['mark_days_text']); ?></span>
+                                    <?php }else{ ?>
+                                        выделить
+                                    <?php } ?>
+                                </a>
+                                <div class="popup">
+                                    <strong class="text_popup">Услуга ВЫДЕЛИТЬ платная</strong> 
+                                    <div>
+                                        <span>Стоимость услуги - <b>100 ТГ</b></span> 
+                                        <span>На счету - <b><?php echo($this->session('profile')->balance !== null ? $this->session('profile')->balance : 0 ); ?> тг</b></span>
+                                    </div>
+                                    <div class="btn_holder">
+                                        <a class="btn_search">Оплатить</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list list_rating">
+                            <div class="popup_holder">
+                                <a href="#" >сделать срочным</a>
+                                <div class="popup">
+                                    <strong class="text_popup">Услуга СДЕЛАТЬ СРОЧНЫМ платная</strong> 
+                                    <div>
+                                        <span>Стоимость услуги- <b>100 ТГ</b></span> 
+                                        <span>На счету - <b><?php echo($this->session('profile')->balance !== null ? $this->session('profile')->balance : 0 ); ?> тг</b></span>
+                                    </div>
+                                    <div class="btn_holder">
+                                        <a class="btn_search">Оплатить</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list list_view">
+                            <div class="popup_holder">
+                                <a href="#" >просмотр аналитики</a>
+                                <div class="popup">
+                                    <strong class="text_popup">Услуга ПОДНЯТЬ ВВЕРХ платная</strong> 
+                                    <div>
+                                        <span>Стоимость услуги- <b>100 ТГ</b></span> 
+                                        <span>На счету - <b>500 тг</b></span>
+                                    </div>
+                                    <div class="btn_holder">
+                                        <a class="btn_search">Оплатить</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <?php } ?>
+            <?php } ?>
+            <div class="btn_holder">
+                <a class="btn_search" href="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'index', 'action' => 'add'))); ?>">+ Подать объявление</a>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+<?php /* ?>
+<div class="wrapper">
+    <div class="wrapper-center">
+        <div class="container">
+            <h2 class="lk-title">Личный кабинет</h2>
+
+            <div class="lk">
+                <?php echo($this->partial('profile-partials/tabs-menu.phtml')); ?>
+                <div class="tab-content uslugi kab">
+                    <div id="tab1">
+                        <a class="new_adverticement" href="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'index', 'action' => 'add'))); ?>">
+                            <span></span>
+                            подать объявление
+                        </a>
+
+                        <div class="tadv-lk">
+                            <?php if (!empty($advertsList)) { ?>
+                                <?php foreach ($advertsList as $item) { ?>
+                                        <div class="cards <?php echo ($item['top_css_class']); echo ($item['not_active_css_class']);?> <?php echo ($item['mark'] == 'y' ? 'marked' : '')?>">
+                                            <div class="info">
+                                                <div class="days">
+                                                <p>Выделение:</p>
+                                                    <span class="num"><?php echo $item['mark_days_left']; ?></span>
+                                                    <?php echo $item['mark_days_text']; ?>
+                                                </div>
+                                                <span class="views"><?php echo($item['counter']); ?></span>
+                                                <span class="rating">
+                                                    <?php echo($item['rating_text']); ?>
+                                                </span>
+                                                <div class="days">
+                                                <p>ТОП:</p>
+                                                    <span class="num"><?php echo $item['top_days_left']; ?></span>
+                                                    <?php echo $item['top_days_text']; ?>
+                                                </div>
+                                            </div>
+                                            <div class="item-content">
+                                                <div class="col">
+                                                    <?php if (!empty($item['img_id'])) { ?>
+                                                        <img src="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'image', 'action' => 'adverts-gallery', 'id' => $item['img_id'], 'w' => 100, 'h' => 100, 'crop' => 'y'))) ?>" alt=""/>
+                                                    <?php } else { ?>
+                                                        <img src="/images/tmp/postimg10.jpg" alt=""/>
+                                                    <?php } ?>
+                                                    <span class="time"><?php echo date('d.m.Y', ($item['created'])); ?></span>
+                                                </div>
+                                                <div class="col">
+    <!--                                                <p><?php echo($item['name']); ?></p>-->
+                                                    <a href="<?php echo($this->easyUrl(array('module' => 'application','controller' => 'adverts', 'action' => 'view', 'type' => $item['type_id'], 'id' => $item['id']))); ?>"><?php echo($item['name']); ?></a>
+                                                    <ul>
+                                                        <li>
+                                                        <?php if (isset($item['breadcrumbs']) && is_array($item['breadcrumbs'])) { ?>
+                                                            <?php echo($this->partial('application/catalog/category/breadcrumbs.phtml', array('breadcrumbs' => $item['breadcrumbs']))); ?>
+                                                        <?php } else { ?>
+                                                            <a href="<?php echo($this->easyUrl(array('module' => 'application', 'controller' => 'index', 'action' => 'category', 'id' => $item['category_id']))); ?>">
+                                                                <?php echo($item['category']); ?>
+                                                            </a>
+                                                        <?php } ?>
+                                                        </li>
+                                                    </ul>
+                                                    <?php if (!empty($item['location'])) { ?>
+                                                        <span class="post-info-place">
+                                                            <em></em>
+                                                            <a href="#"><?php echo($item['location']); ?></a>
+                                                        </span>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                            <div class="price-col">
+                                                <?php if ($item['price'] > 0) { ?>
+                                                    <span class="prce">
+                                                        <span class="symb"></span>
+                                                        <?php echo($item['price']); ?>
+                                                    </span>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="menu">
+                                                <div class="item action-edit" data-url="<?php echo($this->easyUrl(array('action' => 'edit', 'id' => $item['id']))) ?>">
+                                                    <i class="ico-edit"></i>
+
+                                                    <div class="submnu">
+                                                        <p>Редактировать объявление</p>
+                                                    </div>
+                                                </div>
+                                                <div class="item action-remove" data-url="<?php echo($this->easyUrl(array('action' => 'remove', 'id' => $item['id']))) ?>">
+                                                    <i class="ico-close"></i>
+
+                                                    <div class="submnu">
+                                                        <p>Удалить объявление</p>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="ico-up adverts-update-show"></i>
+
+                                                    <div class="submnu">
+                                                        <p>Стать первым в списке</p>
+
+                                                        <div class="adverts-update-box hide">
+                                                            <span><b>50</b></span>
+
+                                                            <div class="btn-holder">
+                                                                <?php if ($item['status'] == 'y') { ?>
+                                                                    <a href="<?php echo($this->easyUrl(array('controller' => 'index', 'action' => 'lift', 'id' => $item['id']))) ?>" class="btn-yellow">оплатить</a>
+                                                                <?php } else { ?>
+                                                                    <a class="btn-yellow">обьявление еще не проверено</a>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="item">
+                                                    <i class="ico-next adverts-update-show"></i>
+
+                                                    <div class="submnu">
+                                                        <p>Выделить объявление</p>
+                                                        <?php if ($item['status'] == 'y') { ?>
+                                                            <div class="adverts-update-box hide">
+                                                                <span><b>На 7 дней 100 тг</b></span>
+                                                                <div class="btn-holder">
+                                                                    <a href="<?php echo($this->easyUrl(array('controller' => 'index', 'action' => 'prolong_mark', 'id' => $item['id'], 'days' => 7))) ?>" class="btn-yellow">оплатить</a>
+                                                                </div>
+                                                                <span><b>На 15 дней 200 тг</b></span>
+                                                                <div class="btn-holder">
+                                                                    <a href="<?php echo($this->easyUrl(array('controller' => 'index', 'action' => 'prolong_mark', 'id' => $item['id'], 'days' => 15))) ?>" class="btn-yellow">оплатить</a>
+                                                                </div>
+                                                                <span><b>На 30 дней 350 тг</b></span>
+                                                                <div class="btn-holder">
+                                                                    <a href="<?php echo($this->easyUrl(array('controller' => 'index', 'action' => 'prolong_mark', 'id' => $item['id'], 'days' => 30))) ?>" class="btn-yellow">оплатить</a>
+                                                                </div>
+                                                            </div>      
+                                                        <?php } else { ?>
+                                                            <div class="adverts-update-box hide">
+                                                                <a class="btn-yellow">обьявление еще не проверено</a>
+                                                            </div>    
+                                                        <?php } ?>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                <div class="item last">
+                                                    <i class="ico-next adverts-update-show"></i>
+
+                                                    <div class="submnu">
+                                                        <p>Поместить объявление в топ</p>
+                                                        <?php if ($item['status'] == 'y') { ?>
+                                                            <div class="adverts-update-box hide">
+                                                                <span><b>На 3 дня 200 тг</b></span>
+                                                                <div class="btn-holder">
+                                                                    <a href="<?php echo($this->easyUrl(array('controller' => 'index', 'action' => 'prolong_top', 'id' => $item['id'], 'days' => 3))) ?>" class="btn-yellow">оплатить</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="adverts-update-box hide">
+                                                                <span><b>На 7 дней 350 тг</b></span>
+                                                                <div class="btn-holder">
+                                                                    <a href="<?php echo($this->easyUrl(array('controller' => 'index', 'action' => 'prolong_top', 'id' => $item['id'], 'days' => 7))) ?>" class="btn-yellow">оплатить</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="adverts-update-box hide">
+                                                                <span><b>На 15 дней 500 тг</b></span>
+                                                                <div class="btn-holder">
+                                                                    <a href="<?php echo($this->easyUrl(array('controller' => 'index', 'action' => 'prolong_top', 'id' => $item['id'], 'days' => 15))) ?>" class="btn-yellow">оплатить</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="adverts-update-box hide">
+                                                                <span><b>На 30 дней 800 тг</b></span>
+                                                                <div class="btn-holder">
+                                                                    <a href="<?php echo($this->easyUrl(array('controller' => 'index', 'action' => 'prolong_top', 'id' => $item['id'], 'days' => 30))) ?>" class="btn-yellow">оплатить</a>
+                                                                </div>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <div class="adverts-update-box hide">
+                                                                <a class="btn-yellow">обьявление еще не проверено</a>
+                                                            </div> 
+                                                        <?php } ?>
+                                                    </div>
+                                                </div>                                               
+                                            </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php */ ?>

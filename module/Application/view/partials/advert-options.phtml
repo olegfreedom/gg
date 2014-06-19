@@ -1,0 +1,17 @@
+<div class="col2">
+    <?php if ($advertOptions) { ?>
+        <?php foreach ($advertOptions as $item) { ?>
+            <p><?php echo($item['option_name']); ?> :</p>
+            <span><?php if($item['option_type'] == 'checkbox') { ?>
+                    <?php echo ($item['option_value'] == 'y' ? 'да' : 'нет') ?>
+                <?php } else if (is_array($item['option_value'])) { ?>
+                    <?php foreach ($item['option_value'] as $option) { ?>
+                        <?php echo ($option['name'].(end($item['option_value']) !== $option ? ', ' : '')); ?>
+                    <?php } ?>
+                <?php } else {?>
+                    <?php echo ($item['option_value']); ?>
+                <?php } ?></span>
+
+        <?php } ?>
+    <?php } ?>
+</div>

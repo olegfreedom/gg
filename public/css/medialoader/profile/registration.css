@@ -1,0 +1,14 @@
+/**
+ * Use to URL:
+ *  /profile/registration
+ *  /profile/registration/*
+ */
+
+.add_advert input[type="password"] {
+    -moz-box-sizing: border-box;
+    height: 31px;
+    padding: 3px;
+    width: 358px !important;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}

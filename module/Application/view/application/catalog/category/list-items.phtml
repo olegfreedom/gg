@@ -1,0 +1,15 @@
+<?php if (isset($categoryList) && is_array($categoryList) && isset($currentCategory) && isset($menuLevel)) { ?>
+    <?php foreach ($categoryList as $item) { ?>
+            <li class="rubrics">
+            <?php if (isset($item['subcategory'])) { ?>
+                <a href="<?php echo($this->easyUrl(array('action' => 'search', 'category' => $item['url'], 'page' => null), array(), true)); ?>">
+                    <?php echo($item['name']); ?>
+                </a>
+            <?php } else { ?>
+                <a href="<?php echo($this->easyUrl(array('action' => 'search', 'category' => $item['url'], 'page' => null), array(), true)); ?>">
+                    <?php echo($item['name']); ?>
+                </a>
+            <?php } ?>
+                </li>
+        <?php } ?>
+<?php }

@@ -1,0 +1,49 @@
+<div class="wrapper sms-page">
+	<div class="wrapper-center">
+        <div class="container centered">
+            <h3 class="reg-title">Спасибо за выбор нашего сервиса.
+                <span>Для получения доступа ко всем возможностям сайта, пожалуйста зарегистрируйтесь!</span>
+            </h3>
+            <div class="regForm-holder add_advert">
+                <form action="<?php echo($this->easyUrl(array('module' => 'profile', 'controller' => 'registration'))); ?>" method="post" class="registration">
+                    <div class="wrap">
+                        <label for="e-mail">Эл. почта *</label>
+                        <div class="input-holder">
+                            <input id="e-mail" type="text" placeholder="Введите адрес электронной почты" name="username">
+                            <span class="errors">* Заполните обязательное поле</span>
+                        </div>
+                    </div>
+                    <div class="wrap">
+                        <label for="pasw">Пароль *</label>
+                        <div class="input-holder">
+                            <input id="pasw" type="password" placeholder="Введите пароль" name="password">
+                            <span class="errors">* Заполните обязательное поле</span>
+                        </div>
+                    </div>
+                    <div class="wrap">
+                        <label for="pasw_repeat">Повторите пароль *</label>
+                        <div class="input-holder">
+                            <input id="pasw_repeat" type="password" placeholder="Введите повторно пароль" name="retry_password">
+                            <span class="errors">* Заполните обязательное поле</span>
+                        </div>
+                    </div>
+                    <div class="agree group">
+<!--                            <input id="rule" type="checkbox">-->
+                            <label for="rule">
+                                Я соглашаюсь с
+                                <a href="<?php echo($this->easyUrl(array('module' => 'application','controller' => 'user-agreement'))); ?>">правилами использования сервиса</a>
+                                , а также с передачей и обработкой моих данных в Uslugi.kz. Я подтверждаю своё совершеннолетие и ответственность за
+                            </label>
+                        </div>
+                        <div class="btn_holder">
+                            <a class="btn_search submitIt">отправить</a>
+                        </div>
+
+                    <input type="hidden" name="validator" value="<?php echo($this->easyUrl(array('module' => 'profile','controller' => 'registration', 'action' => 'validator'))); ?>">
+                    <input type="hidden" name="registration-form" value="0">
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
